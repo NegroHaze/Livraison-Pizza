@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { ModalPanierPage } from './modal-panier.page';
 import { RouterModule } from '@angular/router';
-
-import { HomePage } from './home.page';
-import { PizzaServicesService } from '../services/pizza-services.service';
 
 @NgModule({
   imports: [
@@ -15,11 +13,10 @@ import { PizzaServicesService } from '../services/pizza-services.service';
     RouterModule.forChild([
       {
         path: '',
-        component: HomePage
+        component: ModalPanierPage
       }
-    ]),
+    ])
   ],
-  declarations: [HomePage],
-  providers: [PizzaServicesService]
+  declarations: [ModalPanierPage]
 })
-export class HomePageModule {}
+export class ModalPanierPageModule {}

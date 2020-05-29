@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'modal',
+    loadChildren: () => import('./modals/modalDetails/modal.module').then( m => m.ModalPageModule)
+  },
+  {
+    path: 'modal-panier',
+    loadChildren: () => import('./modals/modal-panier/modal-panier.module').then( m => m.ModalPanierPageModule)
+  },
 ];
 
 @NgModule({

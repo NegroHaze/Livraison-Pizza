@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Panier</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let key of transitionKeys">
+    <ion-card-header>
+      {{key.nom}}
+    </ion-card-header>
+    
+    <ion-card-content>
+        <img [src]="key.photo" class="img-lo">
+    </ion-card-content>
+
+    <ion-footer class="footer-card">
+      <ion-icon name="remove-circle" class="icon-footer" (click)="addingPanier()"></ion-icon>
+      <ion-label class="label-footer">{{pizzasPanier.get(key)}}</ion-label>
+      <ion-icon name="add-circle" class="icon-footer" (click)="deletePanier()"></ion-icon>
+    </ion-footer>
+  </ion-card>
+</ion-content>

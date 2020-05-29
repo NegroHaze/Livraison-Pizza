@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detail</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>Nom</ion-col>
+      <ion-col>{{PizzaClick.Nom}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>Prix</ion-col>
+      <ion-col>{{PizzaClick.Prix}} €</ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col>
+        Ingredient
+      </ion-col>
+      <ion-col>
+        <div *ngFor="let ing of PizzaClick.Ingredients">
+          <ion-label>
+            -{{ing.nom}}
+          </ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <img [src]="PizzaClick.Photo">
+</ion-content>

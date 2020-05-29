@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Livraison Pizza
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Livraison Pizza</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div>
+
+    <ion-card class="panier-card">
+        <img src="../../assets/icon/panier.png" class="panier-img" (click)="goToPanier()">
+        <ion-label class="panier">{{panier.Pizzas.length}} Pizzas - Total: {{panier.TotalPrice.toFixed(2)}} €</ion-label>
+    </ion-card>
+    <ion-card>
+      <ion-grid *ngIf="pizzas != null">
+        <ion-row *ngFor="let piz of pizzas" class="rowPizza">
+          <ion-col>
+            {{piz.nom}}
+            <div>
+              prix: {{piz.prix}} €
+            </div>
+          </ion-col>
+          <ion-col (click)="goToDetails(piz)">
+            <img [src]="piz.photo">
+          </ion-col>
+          <div>
+            <ion-button class="buttonAdd" (click)="addingPanier(piz)">
+              Ajouté
+            </ion-button>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </div>
+
+</ion-content>
