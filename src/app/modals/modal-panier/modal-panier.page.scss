@@ -1,5 +1,11 @@
-img{
-    max-width: 10%;
+.img-lo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.header-card{
+    text-align: center;
 }
 
 .footer-card{
@@ -13,5 +19,21 @@ img{
 
 .label-footer{
     vertical-align: middle;
-    padding: 0px 0.3em;
+    padding: 0 0.3em;
+}
+
+.panier-card{
+    display: inline-block;
+    width: 94%;
+    text-align: center;
+}
+
+.panier{
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+
+.panier-img{
+  max-width: 2em;
+  vertical-align: middle;
 }

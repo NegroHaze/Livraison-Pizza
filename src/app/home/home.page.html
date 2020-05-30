@@ -15,14 +15,22 @@
   <div>
 
     <ion-card class="panier-card">
-        <img src="../../assets/icon/panier.png" class="panier-img" (click)="goToPanier()">
-        <ion-label class="panier">{{panier.Pizzas.length}} Pizzas - Total: {{panier.TotalPrice.toFixed(2)}} €</ion-label>
+      <img src="../../assets/icon/panier.png" class="panier-img" (click)="goToPanier()">
+      <ion-label class="panier">{{panier.TotalPizza}} Pizzas - Total: {{panier.TotalPrice.toFixed(2)}}€</ion-label>
     </ion-card>
+
+    <div *ngIf="adminMode; else elseBlock">
+      <ion-button color="success" class="admin-button" (click)="switchTo('normal')">Normal MODE</ion-button>
+    </div>
+    <ng-template #elseBlock>
+      <ion-button color="danger" class="admin-button" (click)="switchTo('admin')">ADMIN MODE</ion-button>
+    </ng-template>
+
     <ion-card>
       <ion-grid *ngIf="pizzas != null">
         <ion-row *ngFor="let piz of pizzas" class="rowPizza">
           <ion-col>
-            {{piz.nom}}
+            <strong>{{piz.nom}}</strong>
             <div>
               prix: {{piz.prix}} €
             </div>
@@ -31,9 +39,20 @@
             <img [src]="piz.photo">
           </ion-col>
           <div>
-            <ion-button class="buttonAdd" (click)="addingPanier(piz)">
-              Ajouté
-            </ion-button>
+            <div *ngIf="!adminMode; else elseBlock">
+              <ion-button class="buttonAdd" (click)="addingPanier(piz)">
+                Ajouté
+              </ion-button>
+            </div>
+            <ng-template #elseBlock>
+              <ion-button class="buttonAdd" (click)="addingPanier(piz)">
+                Modifié
+              </ion-button>
+              <ion-button class="buttonAdd" (click)="addingPanier(piz)">
+                Supprimé
+              </ion-button>
+            </ng-template>
+
           </div>
         </ion-row>
       </ion-grid>

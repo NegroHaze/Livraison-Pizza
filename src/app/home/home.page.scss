@@ -9,6 +9,7 @@ img{
 .panier-card{
     display: inline-block;
     width: 94%;
+    text-align: center;
 }
 
 .panier{
@@ -19,4 +20,8 @@ img{
 .panier-img{
   max-width: 2em;
   vertical-align: middle;
+}
+
+.admin-button{
+  margin: 0 7.5em;
 }

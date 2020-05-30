@@ -1,14 +1,13 @@
-import Pizza from './Pizza';
 import bask from './BasketTransition';
 
 export default class Basket {
-    Pizzasse: bask[];
-    Pizzas: Pizza[];
+    Pizzas: bask[];
+    TotalPizza: number;
     TotalPrice: number;
 
-    constructor(pizzasse: bask[], pizzas: Pizza[], totalPrice: number) {
-        this.Pizzasse = pizzasse;
+    constructor(pizzas: bask[]) {
         this.Pizzas = pizzas;
-        this.TotalPrice =totalPrice;
+        this.TotalPizza = 0;
+        this.TotalPrice = 0;
     }
 }

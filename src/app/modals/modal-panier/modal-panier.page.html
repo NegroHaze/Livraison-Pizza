@@ -8,19 +8,23 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let key of transitionKeys">
-    <ion-card-header>
-      {{key.nom}}
+  <ion-card class="panier-card">
+    <img src="../../assets/icon/panier.png" class="panier-img">
+    <ion-label class="panier">{{panier.TotalPizza}} Pizzas - Total: {{panier.TotalPrice.toFixed(2)}}€</ion-label>
+  </ion-card>
+  <ion-card *ngFor="let pizzaTransition of panier.Pizzas">
+    <ion-card-header class="header-card">
+      {{pizzaTransition.Pizza.Nom}}
     </ion-card-header>
     
     <ion-card-content>
-        <img [src]="key.photo" class="img-lo">
+        <img [src]="pizzaTransition.Pizza.Photo" class="img-lo">
     </ion-card-content>
 
     <ion-footer class="footer-card">
-      <ion-icon name="remove-circle" class="icon-footer" (click)="addingPanier()"></ion-icon>
-      <ion-label class="label-footer">{{pizzasPanier.get(key)}}</ion-label>
-      <ion-icon name="add-circle" class="icon-footer" (click)="deletePanier()"></ion-icon>
+      <ion-icon name="remove-circle" class="icon-footer" (click)="deletePanier(pizzaTransition)"></ion-icon>
+      <ion-label class="label-footer">{{pizzaTransition.Quantity}}</ion-label>
+      <ion-icon name="add-circle" class="icon-footer" (click)="addingPanier(pizzaTransition)"></ion-icon>
     </ion-footer>
   </ion-card>
 </ion-content>
