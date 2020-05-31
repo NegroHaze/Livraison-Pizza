@@ -119,16 +119,30 @@ export class HomePage {
   }
 
   deletePizza(pizza: Pizza) {
-    this.pizzaServices.deletePizza(pizza.id).subscribe();
+    this.deletePizzaAlertConfirm(pizza)
   }
 
   updatePizza(pizza: Pizza){
-    console.log(pizza.nom)
-    pizza.nom = "nomUpdate"
-    this.pizzaServices.updateHero(pizza)
-    .subscribe( pizzaUpdate => {
-      console.log('Update: ')
-      console.log(pizzaUpdate)
-    })
+  }
+
+  async deletePizzaAlertConfirm(pizzaDelete: Pizza) {
+    const alert = await this.alertController.create({
+      header: pizzaDelete.nom,
+      message: `<strong>Attention</strong>
+      la pizza <strong>${pizzaDelete.nom}</strong> va etre supprimée`,
+      buttons: [
+        {
+          text: 'Annulé',
+          role: 'cancel',
+          cssClass: 'button-cancel'
+        }, {
+          text: 'Supprimé',
+          handler: () => {
+            this.pizzaServices.deletePizza(pizzaDelete.id).subscribe(_ => window.location.reload());
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 }
