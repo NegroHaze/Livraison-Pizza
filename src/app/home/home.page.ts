@@ -7,20 +7,22 @@ import Ingredient from '../models/ingredients';
 
 import { PizzaServicesService } from '../services/pizza-services.service';
 import { AlertController, ModalController } from '@ionic/angular';
-import { ModalPage } from '../modals/modalDetails/modal.page'
+import { ModalPage } from '../modals/modalDetails/modal.page';
 import { ModalPanierPage } from '../modals/modal-panier/modal-panier.page';
+import { ModalAddPizzaPage } from '../modals/modal-add-pizza/modal-add-pizza.page';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
 
   panier = new Panier([]);
 
-  pizzas: iPizza[];
-  ingredients: Ingredient[];
+  allPizzas: iPizza[];
+  ingredient: Ingredient[];
 
   adminMode = false;
 
@@ -34,7 +36,7 @@ export class HomePage {
   chargePizza() {
     this.pizzaServices.getPizza()
       .subscribe(resp => {
-        this.pizzas = resp.body;
+        this.allPizzas = resp.body;
         this.chargeIngredient();
       })
   }
@@ -42,7 +44,8 @@ export class HomePage {
   chargeIngredient() {
     this.pizzaServices.getIngredient()
       .subscribe(resp => {
-        this.pizzas.forEach(pizza => {
+        this.ingredient = resp.body;
+        this.allPizzas.forEach(pizza => {
           let i = 0;
           if (pizza.ingredients != null) {
             pizza.ingredients.forEach(ingreInPizza => {
@@ -62,11 +65,11 @@ export class HomePage {
     let adding = true;
     let breaking = false;
     if (this.panier.Pizzas.length == 0) {
-      this.panier.Pizzas.push(new BasketTransition(new Pizza(pizzaToAdd.photo, pizzaToAdd.nom, pizzaToAdd.prix, pizzaToAdd.id, pizzaToAdd.ingredients), 1));
+      this.panier.Pizzas.push(new BasketTransition(new Pizza(pizzaToAdd.photo, pizzaToAdd.nom, pizzaToAdd.prix, pizzaToAdd.ingredients, pizzaToAdd.id), 1));
     } else {
       this.panier.Pizzas.forEach(val => {
         if (!breaking) {
-          if (pizzaToAdd.nom == val.Pizza.Nom) {
+          if (pizzaToAdd.nom == val.Pizza.nom) {
             val.Quantity++;
             adding = true;
             breaking = true;
@@ -76,7 +79,7 @@ export class HomePage {
         }
       })
       if (!adding) {
-        this.panier.Pizzas.push(new BasketTransition(new Pizza(pizzaToAdd.photo, pizzaToAdd.nom, pizzaToAdd.prix, pizzaToAdd.id, pizzaToAdd.ingredients), 1));
+        this.panier.Pizzas.push(new BasketTransition(new Pizza(pizzaToAdd.photo, pizzaToAdd.nom, pizzaToAdd.prix, pizzaToAdd.ingredients, pizzaToAdd.id), 1));
       }
     }
     this.panier.TotalPizza++;
@@ -87,11 +90,15 @@ export class HomePage {
   }
 
   goToDetails(piz: iPizza) {
-    this.presentModal(ModalPage, { PizzaClick: new Pizza(piz.photo, piz.nom, piz.prix, piz.id, piz.ingredients) })
+    this.presentModal(ModalPage, { PizzaClick: new Pizza(piz.photo, piz.nom, piz.prix, piz.ingredients, piz.id) })
   }
 
   goToPanier() {
-    this.presentModal(ModalPanierPage, { panier: this.panier, pizzas: this.pizzas });
+    this.presentModal(ModalPanierPage, { panier: this.panier, pizzas: this.allPizzas });
+  }
+
+  goToAddPizza(){
+    this.presentModal(ModalAddPizzaPage, {ingredients: this.ingredient});
   }
 
   async presentModal(page: any, props: any) {
@@ -107,12 +114,21 @@ export class HomePage {
     return await modal.present();
   }
 
-  switchTo(mode: string){
+  switchTo(mode: string) {
     this.adminMode = mode == "admin";
   }
 
-  deletePizza(pizza: Pizza){
-    
+  deletePizza(pizza: Pizza) {
+    this.pizzaServices.deletePizza(pizza.id).subscribe();
   }
 
+  updatePizza(pizza: Pizza){
+    console.log(pizza.nom)
+    pizza.nom = "nomUpdate"
+    this.pizzaServices.updateHero(pizza)
+    .subscribe( pizzaUpdate => {
+      console.log('Update: ')
+      console.log(pizzaUpdate)
+    })
+  }
 }

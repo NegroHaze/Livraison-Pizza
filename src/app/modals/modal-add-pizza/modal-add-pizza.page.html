@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>modalAddPizza</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-form">
+  <form (ngSubmit)="addNewPizza()">
+    <ion-item>
+      <ion-label>Photo</ion-label>
+      <ion-input type="text" class="input-form" [(ngModel)]="photoToAdd" [ngModelOptions]="{standalone: true}"></ion-input>
+      <img [src]="photoToAdd" style="max-width: 50%;">
+    </ion-item>
+    <ion-item>
+      <ion-label>Nom</ion-label>
+      <ion-input type="text" class="input-form" [(ngModel)]="nomToAdd" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Prix</ion-label>
+      <ion-input type="text" class="input-form" [(ngModel)]="prixToAdd" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-list>
+        <ion-item *ngFor="let entry of formIngredient">
+          <ion-button (click)="deleteIngredient(entry.val)" color="danger">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+          <ion-label>{{entry.val.nom}}</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="entry.isChecked" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>New ingredient</ion-label>
+          <ion-input class="input-form" type="text" [(ngModel)]="newIngredient" [ngModelOptions]="{standalone: true}"></ion-input>
+          <ion-button (click)="addIngredient()">New</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+    <ion-button type="submit" block>Crée une Pizza</ion-button>
+  </form>
+</ion-content>

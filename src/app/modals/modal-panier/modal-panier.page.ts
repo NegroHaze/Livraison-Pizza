@@ -24,7 +24,7 @@ export class ModalPanierPage implements OnInit {
   addingPanier(pizzaTransition: bask){
     pizzaTransition.Quantity++;
     this.panier.TotalPizza++;
-    this.panier.TotalPrice += pizzaTransition.Pizza.Prix;
+    this.panier.TotalPrice += pizzaTransition.Pizza.prix;
   }
 
   deletePanier(pizzaTransition: bask){
@@ -36,7 +36,7 @@ export class ModalPanierPage implements OnInit {
       }
     }
     this.panier.TotalPizza--;
-    this.panier.TotalPrice -= pizzaTransition.Pizza.Prix;
+    this.panier.TotalPrice -= pizzaTransition.Pizza.prix;
   }
 
   dismissModal(){

@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'modal-panier',
     loadChildren: () => import('./modals/modal-panier/modal-panier.module').then( m => m.ModalPanierPageModule)
   },
+  {
+    path: 'modal-add-pizza',
+    loadChildren: () => import('./modals/modal-add-pizza/modal-add-pizza.module').then( m => m.ModalAddPizzaPageModule)
+  },
 ];
 
 @NgModule({

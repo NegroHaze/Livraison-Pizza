@@ -14,11 +14,11 @@
   </ion-card>
   <ion-card *ngFor="let pizzaTransition of panier.Pizzas">
     <ion-card-header class="header-card">
-      {{pizzaTransition.Pizza.Nom}}
+      <strong>{{pizzaTransition.Pizza.nom}}</strong>
     </ion-card-header>
     
     <ion-card-content>
-        <img [src]="pizzaTransition.Pizza.Photo" class="img-lo">
+        <img [src]="pizzaTransition.Pizza.photo" class="img-lo">
     </ion-card-content>
 
     <ion-footer class="footer-card">

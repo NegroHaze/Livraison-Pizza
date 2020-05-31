@@ -11,12 +11,12 @@
   <ion-grid>
     <ion-row>
       <ion-col>Nom</ion-col>
-      <ion-col>{{PizzaClick.Nom}}</ion-col>
+      <ion-col>{{PizzaClick.nom}}</ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>Prix</ion-col>
-      <ion-col>{{PizzaClick.Prix}} €</ion-col>
+      <ion-col>{{PizzaClick.prix}} €</ion-col>
     </ion-row>
     
     <ion-row>
@@ -24,7 +24,7 @@
         Ingredient
       </ion-col>
       <ion-col>
-        <div *ngFor="let ing of PizzaClick.Ingredients">
+        <div *ngFor="let ing of PizzaClick.ingredients">
           <ion-label>
             -{{ing.nom}}
           </ion-label>
@@ -32,5 +32,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <img [src]="PizzaClick.Photo">
+  <img [src]="PizzaClick.photo">
 </ion-content>

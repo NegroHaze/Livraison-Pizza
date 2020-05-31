@@ -13,6 +13,7 @@ export class ModalPage implements OnInit {
   PizzaClick;
 
   ngOnInit() {
+    console.log(this.PizzaClick)
   }
 
   dismissModal(){
